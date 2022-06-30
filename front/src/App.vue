@@ -1,13 +1,20 @@
 <template>
-  <div class="row">
-    <menuVue class="col-md-2" />
-    <div class="col-md-10">
-      <headerVue />
-      <div class="">
-        <fade-transition origin="center" mode="out-in" :duration="250">
-          <router-view :key="$route.fullPath" />
-        </fade-transition>
-      </div>
+  <div id="wrapper">
+    <headerVue />
+    <div>
+      <section class="shop-page">
+        <div class="adjust-page">
+          <div class="row">
+            <menu-vue class="col-sm-2" />
+
+            <div class="col-sm-10 adjust-home-float">
+              <fade-transition origin="center" mode="out-in" :duration="250">
+                <router-view :key="$router.fullPath"></router-view>
+              </fade-transition>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>

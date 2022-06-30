@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+/*======Textos===============================*/
+
+label {
+    font-size: 20px;
+}
+
+
+/* === Ajustes de Imagem =========================================*/
+
+img {
+    width: 50%;
+    height: 30%;
+}
+
+
+/*==== Ajustes de formulario =========================================*/
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 2rem;
+}
+
+
+/*==== Ajustes de Menu =========================================*/
+
+.menu-Fixed {
+    position: fixed !important;
+    z-index: 1;
+    bottom: 0;
+    top: 38%;
+    /* overflow-y: scroll; */
+}
+
+.adjust-page {
+    width: 95%;
+    margin-left: 2rem;
+}
+
+#wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.adjust-home-float {
+    width: 80% !important;
+    float: right;
+}

@@ -1,4 +1,4 @@
-# pi-front
+# front
 
 ## Project setup
 ```
