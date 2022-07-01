@@ -132,7 +132,7 @@ export default {
       console.log(this.form);
       this.$http.post("pessoas", this.form).then((res) => {
         console.log(res);
-      });
+      }).catch(err=>console.log(err));
     },
   },
   mounted() {
