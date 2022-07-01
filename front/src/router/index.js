@@ -17,6 +17,12 @@ const routes = [{
         name: 'Cadastro Aluno',
         component: () =>
             import ('@/views/cadastros/cadastroAluno.vue')
+    },
+    {
+        path: '/cadastro/docente',
+        name: 'Cadastro Docente',
+        component: () =>
+            import ('@/views/cadastros/cadastroDocente.vue')
     }
 ]
 

@@ -19,6 +19,13 @@
               </router-link>
             </li>
           </ul>
+          <ul class="navbar-nav mb-mb-3 adjust-column-menu">
+            <li class="nav-item">
+              <router-link class="nav-link" to="/cadastro/docente">
+                Cadastrar Docente
+              </router-link>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
