@@ -103,6 +103,7 @@
 
 <script>
 import ApiCep from "@/common/ViaCep";
+import Alert from "@/common/Alert";
 export default {
   name: "HomeView",
   data() {
@@ -122,21 +123,21 @@ export default {
   methods: {
     async BuscaCep() {
       let Adress = await ApiCep.searchAdress(this.form.cep);
-      console.log(Adress);
       this.form.rua = Adress.logradouro;
       this.form.estado = Adress.uf;
       this.form.cidade = Adress.localidade;
       this.form.bairro = Adress.bairro;
     },
     SalvaPessoas() {
-      console.log(this.form);
-      this.$http.post("pessoas", this.form).then((res) => {
-        console.log(res);
-      }).catch(err=>console.log(err));
+      this.$http
+        .post("pessoas", this.form)
+        .then(() => {
+          Alert.messageEnvio();
+          this.$router.push("/home");
+        })
+        .catch((err) => console.log(err));
     },
   },
-  mounted() {
-    console.log(this.$http);
-  },
+  mounted() {},
 };
 </script>

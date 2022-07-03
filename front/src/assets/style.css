@@ -36,9 +36,13 @@ img {
 .menu-Fixed {
     position: fixed !important;
     z-index: 1;
-    bottom: 0;
-    top: 38%;
+    top: 10%;
     /* overflow-y: scroll; */
+}
+
+.adjust-column-menu {
+    display: flex;
+    flex-direction: column !important;
 }
 
 .adjust-page {
@@ -55,4 +59,5 @@ img {
 .adjust-home-float {
     width: 80% !important;
     float: right;
+    margin: 2rem 0;
 }

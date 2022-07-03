@@ -23,6 +23,12 @@ const routes = [{
         name: 'Cadastro Docente',
         component: () =>
             import ('@/views/cadastros/cadastroDocente.vue')
+    },
+    {
+        path: '/ListaAlunos',
+        name: 'ListaAlunos',
+        component: () =>
+            import ('@/views/cadastros/listaAlunos.vue')
     }
 ]
 
