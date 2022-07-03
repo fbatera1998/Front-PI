@@ -51,7 +51,9 @@
                       </tbody>
                     </table>
                   </div>
+
                   <b-modal
+                    id="modal-edit"
                     hide-footer
                     :no-close-on-backdrop="true"
                     :no-close-on-esc="true"
@@ -60,7 +62,7 @@
                     size="lg"
                     title="Edição de Aluno"
                   >
-                    <edit-aluno :id="this.id"></edit-aluno>
+                    <edit-aluno :id="this.idEdit"></edit-aluno>
                   </b-modal>
 
                   <b-modal
@@ -116,7 +118,7 @@ export default {
   },
   methods: {
     OpenEdit(id) {
-      this.id = String(id);
+      this.idEdit = String(id);
       this.modalShow = true;
     },
     openDialogRemove(id) {
@@ -130,10 +132,21 @@ export default {
       });
     },
     executeLoad() {
-      this.$http.get("/pessoas").then((res) => {
-        this.lista = res.data;
-      });
+      this.$http.get("/pessoas").then(
+        (res) => {
+          this.lista = res.data;
+        },
+        (err) => {
+          this.swal("Erro", err, "error");
+        }
+      );
     },
+  },
+  created() {
+    this.$eventHub.$on("editClose", () => {
+      this.modalShow = false;
+      this.executeLoad();
+    });
   },
   mounted() {
     this.executeLoad();

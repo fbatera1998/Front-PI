@@ -75,13 +75,6 @@
                       class="form-control form-control-alternative"
                       v-model="form.cidade"
                     />
-                    <label for="rua">Estado</label>
-                    <input
-                      name="estado"
-                      type="text"
-                      class="form-control form-control-alternative"
-                      v-model="form.uf"
-                    />
                     <label for="rua">Complemento</label>
                     <input
                       name="complemento"
@@ -89,7 +82,7 @@
                       class="form-control form-control-alternative"
                       v-model="form.complemento"
                     />
-                    <button class="btn btn-sucess" @click="SalvaPessoas">Salvar</button>
+                    <button class="btn btn-success" @click="SalvaPessoas">Salvar</button>
                   </div>
                 </div>
               </div>
@@ -102,6 +95,7 @@
 </template>
 
 <script>
+import { required, minLength } from "vuelidate/lib/validators";
 import ApiCep from "@/common/ViaCep";
 export default {
   name: "HomeView",
@@ -119,25 +113,82 @@ export default {
       },
     };
   },
+  validations: {
+    form: {
+      nome: {
+        required,
+        minLength: minLength(11),
+      },
+      email: {
+        required,
+        minLength: minLength(2),
+      },
+      cpf: {
+        required,
+        minLength: minLength(11),
+      },
+      rua: {
+        required,
+        minLength: minLength(2),
+      },
+      numero: {
+        required,
+        minLength: minLength(2),
+      },
+      cidade: {
+        required,
+        minLength: minLength(3),
+      },
+      celular: {
+        required,
+        minLength: minLength(11),
+      },
+      cep: {
+        required,
+        minLength: minLength(8),
+      },
+    },
+  },
   methods: {
     async BuscaCep() {
-      let Adress = await ApiCep.searchAdress(this.form.cep);
-      this.form.rua = Adress.logradouro;
-      this.form.estado = Adress.uf;
-      this.form.cidade = Adress.localidade;
-      this.form.bairro = Adress.bairro;
+      this.$v.$touch();
+      if (!this.$v.form.cep.$error) {
+        let Adress = await ApiCep.searchAdress(this.form.cep);
+        this.form.rua = Adress.logradouro;
+        this.form.estado = Adress.uf;
+        this.form.cidade = Adress.localidade;
+        this.form.bairro = Adress.bairro;
+      } else {
+        this.$swal(
+          "CEP fora do formato!!",
+          "para que seja feita a pesquisa corretamente, precisam ser preenchidos 11 (onze) números!",
+          "error"
+        );
+      }
     },
     SalvaPessoas() {
+      this.$v.$touch();
+      if (this.$v.form.$anyError) {
+        this.$swal(
+          "Existem informações fora do padrão ",
+          "Retorne e confira as informações antes de salvar!!",
+          "error"
+        );
+        return;
+      }
       this.$http
         .post("docentes", this.form)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          this.$swal(
+            "Docente Cadastrado com Sucesso!!",
+            "Você será redirecionado para a lista de cadastros",
+            "success"
+          );
+          this.$router.push("/ListaAlunos");
         })
-        .catch((err) => console.log(err));
+        .catch((err) => this.$swal("Ocorreu um erro!!", err.message, "error"));
     },
   },
-  mounted() {
-    console.log(this.$http);
-  },
+  mounted() {},
 };
 </script>
