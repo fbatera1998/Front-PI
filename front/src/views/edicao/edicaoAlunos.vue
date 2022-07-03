@@ -25,7 +25,7 @@
                   name="telefone"
                   class="form-control form-control-alternative"
                   type="tel"
-                  v-model="form.celular"
+                  v-model="form.telefone"
                 />
                 <label for="CPF">CPF</label>
                 <input
@@ -70,20 +70,7 @@
                   class="form-control form-control-alternative"
                   v-model="form.cidade"
                 />
-                <label for="rua">Estado</label>
-                <input
-                  name="estado"
-                  type="text"
-                  class="form-control form-control-alternative"
-                  v-model="form.uf"
-                />
-                <label for="rua">Complemento</label>
-                <input
-                  name="complemento"
-                  type="text"
-                  class="form-control form-control-alternative"
-                  v-model="form.complemento"
-                />
+
                 <button class="btn btn-primary" @click="executeEdit">Alterar</button>
               </div>
             </div>
@@ -116,6 +103,7 @@ export default {
     },
     executeEdit() {
       this.$http.put("/pessoas/" + this.id, this.form).then(() => {
+        this.$swal("Cadastro Alterado", "", "success");
         this.$eventHub.$emit("editClose");
       });
     },

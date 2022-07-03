@@ -30,7 +30,7 @@
                       name="telefone"
                       class="form-control form-control-alternative"
                       type="tel"
-                      v-model="form.celular"
+                      v-model="form.telefone"
                     />
                     <label for="CPF">CPF</label>
                     <input
@@ -96,7 +96,7 @@
 
 <script>
 import ApiCep from "@/common/ViaCep";
-import { required, minLength } from "vuelidate/lib/validators";
+import { required, minLength, email } from "vuelidate/lib/validators";
 export default {
   name: "HomeView",
   data() {
@@ -109,7 +109,7 @@ export default {
         rua: "",
         numero: "",
         cidade: "",
-        celular: "",
+        telefone: "",
       },
     };
   },
@@ -117,10 +117,11 @@ export default {
     form: {
       nome: {
         required,
-        minLength: minLength(11),
+        minLength: minLength(3),
       },
       email: {
         required,
+        email,
         minLength: minLength(2),
       },
       cpf: {
@@ -139,7 +140,7 @@ export default {
         required,
         minLength: minLength(3),
       },
-      celular: {
+      telefone: {
         required,
         minLength: minLength(11),
       },
@@ -168,10 +169,83 @@ export default {
     },
     SalvaPessoas() {
       this.$v.$touch();
-      if (this.$v.form.$anyError) {
+      /* valida Nome */
+      if (this.$v.form.nome.$error) {
         this.$swal(
-          "Existem informações fora do padrão ",
+          "Nome muito pequeno  ",
           "Retorne e confira as informações antes de salvar!!",
+          "error"
+        );
+        return;
+      }
+      /* Valida Telefone */
+      if (this.$v.form.email.$error) {
+        this.$swal(
+          "Telefone muito pequeno ",
+          "Retorne e confira as informações antes de salvar!!",
+          "error"
+        );
+        return;
+      }
+      /* Valida Email */
+      if (this.$v.form.email.$error) {
+        this.$swal(
+          "Email muito pequeno ou fora de Padrão ",
+          "Retorne e confira as informações antes de salvar!!",
+          "error"
+        );
+        return;
+      }
+      /* Valida CPF */
+      if (this.$v.form.cpf.$error) {
+        this.$swal(
+          "CPF muito pequeno ou fora de Padrão ",
+          "Retorne e confira as informações antes de salvar!!",
+          "error"
+        );
+        return;
+      }
+      /* Valida CEP */
+      if (this.$v.form.cep.$error) {
+        this.$swal(
+          "CEP fora do formato!!",
+          "para que seja feita a pesquisa corretamente, precisam ser preenchidos 11 (onze) números!",
+          "error"
+        );
+        return;
+      }
+      /* Valida Rua */
+      if (this.$v.form.rua.$error) {
+        this.$swal(
+          "Rua fora do formato!!",
+          "Retorne e confira as informações antes de salvar!!",
+          "error"
+        );
+        return;
+      }
+      /* Valida numero */
+      if (this.$v.form.numero.$error) {
+        this.$swal(
+          "Numero da residência fora do formato!!",
+          "Para continuar, o numero precisa ter pelo menos 2 (dois) caracteres(Ex: 01)!!",
+          "error"
+        );
+        return;
+      }
+      /* Valida cidade */
+      if (this.$v.form.cidade.$error) {
+        this.$swal(
+          "Nome da Cidade fora do formato!!",
+          "Para continuar, Confira o nome novamente!!",
+          "error"
+        );
+        return;
+      }
+      /* Valida complemento */
+      if (this.$v.form.cidade.$error) {
+        this.$swal(
+          "Nome da Cidade fora do formato!!",
+          "Para continuar, Confira o nome novamente!!",
           "error"
         );
         return;
