@@ -109,7 +109,7 @@ export default {
         rua: "",
         numero: "",
         cidade: "",
-        celular: "",
+        telefone: "",
       },
     };
   },
