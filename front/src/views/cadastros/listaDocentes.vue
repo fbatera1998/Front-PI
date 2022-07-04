@@ -8,7 +8,7 @@
               <div class="card-header border-0">
                 <div class="row">
                   <div class="col-xl-12">
-                    <h4>Lista de Alunos Cadastrados</h4>
+                    <h4>Lista de Docentes Cadastrados</h4>
                   </div>
                   <div class="col-xl-12">
                     <table
