@@ -184,7 +184,7 @@ export default {
             "Você será redirecionado para a lista de cadastros",
             "success"
           );
-          this.$router.push("/ListaAlunos");
+          this.$router.push("/ListaDocentes");
         })
         .catch((err) => this.$swal("Ocorreu um erro!!", err.message, "error"));
     },

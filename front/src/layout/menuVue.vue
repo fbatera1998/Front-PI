@@ -19,13 +19,18 @@
               </router-link>
             </li>
             <li class="nav-item">
+              <router-link class="nav-link" to="/ListaAlunos">
+                Lista de Alunos
+              </router-link>
+            </li>
+            <li class="nav-item">
               <router-link class="nav-link" to="/cadastro/docente">
                 Cadastrar Docente
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/ListaAlunos">
-                Lista de Alunos
+              <router-link class="nav-link" to="/ListaDocentes">
+                Lista de Docentes
               </router-link>
             </li>
           </ul>
